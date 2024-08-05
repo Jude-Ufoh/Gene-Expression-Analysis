@@ -22,14 +22,47 @@ Gene Expression data is the information that shows the genes that are actively p
   dat <- read.csv(file = "../Gene Expression Data/GSE183947_fpkm.csv")
 
 - **Loading and Manipulating Metadata**: It was necessary to obtain the metadata which included the supplementary file, donor, metastasis and tissue for accurate interpretation and meaningful analysis. The metadata was manipulated by renaming the columns and changing some values in the column.
-  ![image](https://github.com/user-attachments/assets/26782f4e-8265-47b3-914a-ab823a50bfab)
+   ~~~~
+      #get metadata
+      gse <- getGEO(GEO = 'GSE183947', GSEMatrix = TRUE)
+
+      metadata <-pData(phenoData(gse[[1]]))
+      head(metadata)
+
+      # modifying the metadata by selecting some columns
+
+      metadata.modified <- metadata %>%
+  
+                #selecting some columns
+                select(1,10,11,17) %>%
+                #renaming of columns
+                rename(tissue = characteristics_ch1)%>%
+                 rename(metastasis = characteristics_ch1.1)%>%
+                #changing  some values in a column
+                mutate(tissue =gsub("tissue: ","",tissue))%>%
+                mutate(metastasis =gsub("metastasis: ","",metastasis))
 - **Manipulating the Gene Expression Data**: the main gene expression data stored as 'dat' is reshaped to make for  a long file renamed 'dat.long' having three columns which are the gene  samples FPKM
-![image](https://github.com/user-attachments/assets/2eb5bfa2-1f07-4185-926e-ca408e917b6a)
+  ~~~~
+      #reshaping Data
+      dat.long <- dat%>%
+          rename(gene =X) %>%
+          gather(key ='samples', value ='FPKM', -gene)
 ![image](https://github.com/user-attachments/assets/057e1f95-5ae6-4788-bf5f-f60b11d30433)
-**Combining gene expression data and metadata**: the two datasets were combined using left_join
-![image](https://github.com/user-attachments/assets/ec92d29f-fb5c-4659-9f9b-1153d4fd62e4)
-  **Brief Statistical Analysis**: The data for BRCA1 and BRCA2 genes were filtered, grouped by gene and tissue and the mean and median values for each group.
-![image](https://github.com/user-attachments/assets/09f47fb1-5f9d-4df4-80aa-4c1a4d550f93)
+- **Combining gene expression data and metadata**: the two datasets were combined using left_join
+    ~~~~~
+         dat.long<-dat.long %>%
+            left_join(., metadata.modified, by =c("samples" = "description"))
+            
+- **Brief Statistical Analysis**: The data for BRCA1 and BRCA2 genes were filtered, grouped by gene and tissue and the mean and median values for each group.
+  ~~
+    dat.long %>%
+        filter(gene =="BRCA1" | gene =='BRCA2' )%>%
+        group_by(gene, tissue)%>%
+        summarize(mean_FPKM =mean(FPKM),
+            median_FPKM = median(FPKM))%>%
+        arrange(-mean_FPKM)
+
+ 
 
 ## Visualisation
 **Barplot** : In the context of the gene expression data I was working with, the bar plots were used to visualize the FPKM values of specific genes.
