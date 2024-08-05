@@ -32,22 +32,22 @@ Gene Expression data is the information that shows the genes that are actively p
 ![image](https://github.com/user-attachments/assets/09f47fb1-5f9d-4df4-80aa-4c1a4d550f93)
 
 ## Visualisation
-**Barplot**
+**Barplot** : In the context of the gene expression data I was working with, the bar plots were used to visualize the FPKM values of specific genes.
 ![image](https://github.com/user-attachments/assets/6be4f38b-74b0-49e5-8253-4faa48fa63a6)
 
-**Density Plot**
+**Density Plot**: This was helpful for identifying genes that are differentially expressed, as well as understanding the overall distribution of gene expression within the dataset
 ![image](https://github.com/user-attachments/assets/5eff55ae-e0a8-43c5-bf39-5f851e45f9fe)
 
-**Boxplot**
+**Boxplot**: This enabled me to compare the distributions of gene expression between different groups such as metastasis.
 ![image](https://github.com/user-attachments/assets/d63c7da1-3b7e-4c00-a6df-3bce789c85c0)
 
-**scatterplot**
+**scatterplot**: This allowed for the visualization of the pattern, direction, and strength of the relationship between the two genes BRCA1 and BRCA2.
 ![image](https://github.com/user-attachments/assets/aefaa11e-53ad-4079-90f3-446f14e4e429)
 
-**Heatmap**
-![image](https://github.com/user-attachments/assets/c455a2ab-1321-49cd-b331-b3ea09c7ed10)
 
 
+## Conclusion
+Gene expression data analysis, manipulation, and visualization are essential in biological research for understanding disease mechanisms, biomarker discovery, drug development, personalized medicine, biological pathway analysis, and data visualization. Critical analysis of gene expression data can give insight into the molecular basis of diseases, help to identify potential therapeutic targets and advance personalised medicine.
 
 
 
