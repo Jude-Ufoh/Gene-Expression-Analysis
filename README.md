@@ -54,13 +54,13 @@ Gene Expression data is the information that shows the genes that are actively p
             left_join(., metadata.modified, by =c("samples" = "description"))
             
 - **Brief Statistical Analysis**: The data for BRCA1 and BRCA2 genes were filtered, grouped by gene and tissue and the mean and median values for each group.
-  ~~
-    dat.long %>%
-        filter(gene =="BRCA1" | gene =='BRCA2' )%>%
-        group_by(gene, tissue)%>%
-        summarize(mean_FPKM =mean(FPKM),
+    ~~~~
+        dat.long %>%
+            filter(gene =="BRCA1" | gene =='BRCA2' )%>%
+            group_by(gene, tissue)%>%
+            summarize(mean_FPKM =mean(FPKM),
             median_FPKM = median(FPKM))%>%
-        arrange(-mean_FPKM)
+            arrange(-mean_FPKM)
 
  
 
